@@ -1,5 +1,5 @@
 import streamlit as st
-from google import genai
+import google.generativeai as genai
 import smtplib
 
 st.set_page_config(page_title="mAIl-IT", page_icon=":speech_balloon:", layout="centered")
@@ -20,10 +20,14 @@ if 'output' not in st.session_state:
     st.session_state['output'] = ""
 
 def AI(user_prompt):
-    client = genai.Client(api_key="AIzaSyBOvwQexlkM5UFLEDv6si9xj2wfikGvmt0")
-    response = client.models.generate_content(
-    model="gemini-2.0-flash", contents=user_prompt
-    )
+    #client = genai.Client(api_key="AIzaSyBOvwQexlkM5UFLEDv6si9xj2wfikGvmt0")
+    #response = client.models.generate_content(
+    #model="gemini-2.0-flash", contents=user_prompt
+    #)
+    #return response.text
+    genai.configure(api_key="AIzaSyBOvwQexlkM5UFLEDv6si9xj2wfikGvmt0")
+    model = genai.GenerativeModel('gemini-2.0-flash')
+    response = model.generate_content(user_prompt)
     return response.text
 
 def sendMail(email, password, to_email, content):
