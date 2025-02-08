@@ -1,9 +1,9 @@
 import streamlit as st
 import google.generativeai as genai
-import smtplib
 import base64
 from email.mime.text import MIMEText
 from google_auth_oauthlib.flow import InstalledAppFlow
+from google_auth_oauthlib.flow import Flow
 from googleapiclient.discovery import build
 SCOPES = ["https://www.googleapis.com/auth/gmail.send"]
 
@@ -41,8 +41,8 @@ def message_maker(content):
     return p[0][9:], '\n'.join(p[2:])
 
 def sendMail(to_email, content):
-    flow = InstalledAppFlow.from_client_secrets_file('credentials.json', SCOPES)
-
+    #flow = InstalledAppFlow.from_client_secrets_file('credentials.json', SCOPES)
+    flow = InstalledAppFlow.from_client_config({"web":{"client_id":"942737272714-nsb4kb40i14b9820m0a4i2uqr3qs20no.apps.googleusercontent.com","project_id":"gen-lang-client-0112955057","auth_uri":"https://accounts.google.com/o/oauth2/auth","token_uri":"https://oauth2.googleapis.com/token","auth_provider_x509_cert_url":"https://www.googleapis.com/oauth2/v1/certs","client_secret":"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","redirect_uris":["https://mail-it.streamlit.app","http://localhost:8501"],"javascript_origins":["https://mail-it.streamlit.app","http://localhost:8501"]}}, SCOPES)
     creds = flow.run_local_server(port=0)
 
     service = build('gmail', 'v1', credentials=creds)
