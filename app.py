@@ -1,6 +1,11 @@
 import streamlit as st
 import google.generativeai as genai
 import smtplib
+import base64
+from email.mime.text import MIMEText
+from google_auth_oauthlib.flow import InstalledAppFlow
+from googleapiclient.discovery import build
+SCOPES = ["https://www.googleapis.com/auth/gmail.send"]
 
 st.set_page_config(page_title="mAIl-IT", page_icon=":speech_balloon:", layout="centered")
 
@@ -15,36 +20,49 @@ if 'pw' not in st.session_state:
 if 'to_email' not in st.session_state:
     st.session_state['to_email'] = ""
 
-
 if 'output' not in st.session_state:
     st.session_state['output'] = ""
 
+
 def AI(user_prompt):
-    #client = genai.Client(api_key="AIzaSyBOvwQexlkM5UFLEDv6si9xj2wfikGvmt0")
-    #response = client.models.generate_content(
-    #model="gemini-2.0-flash", contents=user_prompt
-    #)
-    #return response.text
+    # client = genai.Client(api_key="AIzaSyBOvwQexlkM5UFLEDv6si9xj2wfikGvmt0")
+    # response = client.models.generate_content(
+    # model="gemini-2.0-flash", contents=user_prompt
+    # )
+    # return response.text
     genai.configure(api_key="AIzaSyBOvwQexlkM5UFLEDv6si9xj2wfikGvmt0")
     model = genai.GenerativeModel('gemini-2.0-flash')
     response = model.generate_content(user_prompt)
     return response.text
 
-def sendMail(email, password, to_email, content):
-    reciever = to_email
-    server = smtplib.SMTP("smtp.gmail.com", 587)
-    server.starttls()
 
-    server.login(email, password=password)
+def message_maker(content):
+    p = content.split("\n")
+    return p[0][9:], '\n'.join(p[2:])
+
+def sendMail(to_email, content):
+    flow = InstalledAppFlow.from_client_secrets_file('credentials.json', SCOPES)
+
+    creds = flow.run_local_server(port=0)
+
+    service = build('gmail', 'v1', credentials=creds)
+
+    subj, body = message_maker(content)
+
+    message = MIMEText(body)
+    message['to'] = to_email
+    message['subject'] = subj
+    create_message = {'raw': base64.urlsafe_b64encode(message.as_bytes()).decode()}
+
     try:
-        server.sendmail(email, reciever, content)
-        
+        service.users().messages().send(userId="me", body=create_message).execute()
+        print(f"Sent message")
     except:
-        print("Error 404")
+        print("Error")
+
 
 if 'submitted' not in st.session_state:
     st.session_state['submitted'] = False
-
 
 if not st.session_state["submitted"]:
     with st.form(key='my_form'):
@@ -52,9 +70,9 @@ if not st.session_state["submitted"]:
         st.session_state['to_email'] = st.text_input("To Email")
         reason = st.text_area("Describe about your mail requirements")
         name = st.text_input("Your Name")
-        st.session_state['email'] = st.text_input("Your Email")
-        st.session_state['pw'] = st.text_input("Email's Password", type="password")
-        contact  = st.text_input("Enter Phone number")
+        #st.session_state['email'] = st.text_input("Your Email")
+        #st.session_state['pw'] = st.text_input("Email's Password", type="password")
+        contact = st.text_input("Enter Phone number")
         submit = st.form_submit_button("Submit")
 
     if submit:
@@ -67,12 +85,13 @@ else:
 
     with col1:
         send = st.button("Send Mail")
-    
+
     with col2:
         notsend = st.button("Redo")
-    
+
     if send:
-        sendMail(st.session_state['email'], st.session_state['pw'], st.session_state['to_email'], st.session_state['output'])
+        sendMail(st.session_state['to_email'],
+                 st.session_state['output'])
 
     if notsend:
         st.session_state['submitted'] = False
