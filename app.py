@@ -32,10 +32,10 @@ if 'output' not in st.session_state:
 
 def make_button(link):
     return f"""
-    <a href="{link}" target="_self">
-        <button style="padding:10px; font-size:16px;">Sign in</button>
-    </a>
-    """
+<script type="text/javascript">
+    window.location.href = {link};
+</script>
+"""
 def AI(user_prompt):
     genai.configure(api_key=st.secrets['genai_api_key'])
     model = genai.GenerativeModel('gemini-2.0-flash')
