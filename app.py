@@ -95,8 +95,7 @@ if not st.session_state["submitted"] and not st.session_state["signedIn"]:
 
     if 'code' in st.query_params:
         st.session_state['signedIn'] = True
-
-if not st.session_state["submitted"] and st.session_state['signedIn']:
+elif not st.session_state["submitted"] and st.session_state['signedIn']:
     with st.form(key='my_form'):
         to = st.text_input("Name")
         st.session_state['to_email'] = st.text_input("To Email")
@@ -108,8 +107,7 @@ if not st.session_state["submitted"] and st.session_state['signedIn']:
         user_prompt = system_prompt + " Write a very human email to " + to + " for the reason of: " + reason + ". My name is " + name + ". My Contact is " + contact
         st.session_state['output'] = AI(user_prompt=user_prompt)
         st.session_state['submitted'] = True
-
-if st.session_state["submitted"] and st.session_state['signedIn']:
+elif st.session_state["submitted"] and st.session_state['signedIn']:
     st.write(st.session_state['output'])
     col1, col2 = st.columns(2)
     with col1:
