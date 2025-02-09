@@ -30,7 +30,12 @@ if 'to_email' not in st.session_state:
 if 'output' not in st.session_state:
     st.session_state['output'] = ""
 
-
+def make_button(link):
+    return """
+    <a href="{link}" target="_self">
+        <button style="padding:10px; font-size:16px;">Sign in</button>
+    </a>
+    """
 def AI(user_prompt):
     genai.configure(api_key=st.secrets['genai_api_key'])
     model = genai.GenerativeModel('gemini-2.0-flash')
