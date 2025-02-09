@@ -119,6 +119,6 @@ elif st.session_state["submitted"] and st.session_state['signedIn']:
         try:
             sendMail(st.session_state['to_email'], st.session_state['output'])
         except:
-            st.write("There was an error in sending the mail! Please try again!")
+            st.write("There was an error in sending the mail! Please press the Redo button!")
     if notsend:
         st.session_state['submitted'] = False
