@@ -108,7 +108,8 @@ if not st.session_state["submitted"] and st.session_state['signedIn']:
         user_prompt = system_prompt + " Write a very human email to " + to + " for the reason of: " + reason + ". My name is " + name + ". My Contact is " + contact
         st.session_state['output'] = AI(user_prompt=user_prompt)
         st.session_state['submitted'] = True
-elif st.session_state["submitted"] and st.session_state['signedIn']:
+
+if st.session_state["submitted"] and st.session_state['signedIn']:
     st.write(st.session_state['output'])
     col1, col2 = st.columns(2)
     with col1:
