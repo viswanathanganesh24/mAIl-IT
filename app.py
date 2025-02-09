@@ -122,3 +122,4 @@ elif st.session_state["submitted"] and st.session_state['signedIn']:
             st.write("There was an error in sending the mail! Please press the Redo button!")
     if notsend:
         st.session_state['submitted'] = False
+        st.session_state['signedIn'] = False
