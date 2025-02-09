@@ -95,7 +95,7 @@ if 'signedIn' not in st.session_state:
     st.session_state['signedIn'] = False
 
 if not st.session_state["submitted"] and not st.session_state["signedIn"]:
-
+    st.write(auth_url)
     st.markdown(make_button(auth_url), unsafe_allow_html=True)
 
     if 'code' in st.query_params:
