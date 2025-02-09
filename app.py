@@ -31,7 +31,7 @@ if 'output' not in st.session_state:
     st.session_state['output'] = ""
 
 def make_button(link):
-    return """
+    return f"""
     <a href="{link}" target="_self">
         <button style="padding:10px; font-size:16px;">Sign in</button>
     </a>
