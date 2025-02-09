@@ -57,9 +57,7 @@ def sendMail(to_email, content):
     service = None
     if 'code' in st.query_params:
         code = st.query_params['code']
-        st.write(code)
         token = asyncio.run(get_access_token(client, redirect_uri, code))
-        st.write(token)
         creds = Credentials(
             token=token['access_token'],
             refresh_token=token.get('refresh_token'),
@@ -80,9 +78,9 @@ def sendMail(to_email, content):
 
     try:
         service.users().messages().send(userId="me", body=create_message).execute()
-        print(f"Sent message")
+        st.write("Mail has been successfully sent!")
     except:
-        print("Error")
+        st.write("There was trouble in sending mail")
 
 
 if 'submitted' not in st.session_state:
