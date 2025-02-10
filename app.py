@@ -94,10 +94,15 @@ if 'submitted' not in st.session_state:
 if 'signedIn' not in st.session_state:
     st.session_state['signedIn'] = False
 
+if "state" in st.query_params and st.query_params["state"][0] == "logged_in":
+    st.write("User is logged in!")
+
 if not st.session_state["submitted"] and not st.session_state["signedIn"]:
     st.write(auth_url)
-    st.markdown(make_button(auth_url), unsafe_allow_html=True)
-
+    #st.markdown(make_button(auth_url), unsafe_allow_html=True)
+    singin = st.link_button("Sign in", auth_url)
+    if signin:
+        st.query_params(state='logged_in')
     if 'code' in st.query_params:
         st.session_state['signedIn'] = True
 elif not st.session_state["submitted"] and st.session_state['signedIn']:
