@@ -1,3 +1,8 @@
+'''
+This code has been written and maintained by Viswanathan Ganesh.
+Feel free to use the code but give due credits!
+'''
+
 import asyncio
 import streamlit as st
 import google.generativeai as genai
@@ -30,12 +35,6 @@ if 'to_email' not in st.session_state:
 if 'output' not in st.session_state:
     st.session_state['output'] = ""
 
-def make_button(link):
-    return f"""
-<script type="text/javascript">
-    window.location.href = {link};
-</script>
-"""
 def AI(user_prompt):
     genai.configure(api_key=st.secrets['genai_api_key'])
     model = genai.GenerativeModel('gemini-2.0-flash')
@@ -75,7 +74,6 @@ def sendMail(to_email, content):
         service = build('gmail', 'v1', credentials=creds)
 
     subj, body = message_maker(content)
-
     message = MIMEText(body)
     message['to'] = to_email
     message['subject'] = subj
@@ -98,9 +96,8 @@ if "logged_in" in st.query_params and st.query_params["logged_in"] == "logged_in
     st.session_state['signedIn'] = True
 
 if not st.session_state["submitted"] and not st.session_state["signedIn"]:
-    st.write(auth_url)
-    #st.markdown(make_button(auth_url), unsafe_allow_html=True)
     st.link_button("Sign in", auth_url)
+    
     if 'code' in st.query_params:
         st.session_state['signedIn'] = True
 elif not st.session_state["submitted"] and st.session_state['signedIn']:
