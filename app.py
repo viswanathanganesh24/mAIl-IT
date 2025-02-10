@@ -95,7 +95,7 @@ if 'signedIn' not in st.session_state:
     st.session_state['signedIn'] = False
 
 if "logged_in" in st.query_params and st.query_params["logged_in"] == "logged_in":
-    st.write("User is logged in!")
+    st.session_state['signedIn'] = True
 
 if not st.session_state["submitted"] and not st.session_state["signedIn"]:
     st.write(auth_url)
