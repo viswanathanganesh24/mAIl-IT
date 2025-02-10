@@ -102,18 +102,18 @@ if not st.session_state["submitted"] and not st.session_state["signedIn"]:
 </header>''', unsafe_allow_html=True)
     st.markdown('''<section style="
     margin-bottom: 30px;
-    text-align: left; /* Left-align the text */
-    max-width: 800px; /* Limit width for better readability */
-    margin-left: auto; /* Keep horizontally centered (for the section, not text) */
+    text-align: left;
+    max-width: 800px;
+    margin-left: auto;
     margin-right: auto;
-    padding-left: 20px; /* Add some left padding */
+    padding-left: 20px; 
     padding-right: 20px;
 ">
-    <h2 style="color: #333;">Welcome to Mail IT!</h2>
+    <h2 style="color: #fff;">Welcome to Mail IT!</h2>
     <p style="
-        line-height: 1.6; /* Improved readability */
-        color: #555; /* Slightly softer text color */
-        font-size: 16px; /* Consistent font size */
+        line-height: 1.6;
+        color: #555;
+        font-size: 18px;
     ">
         Need to send an email quickly? We've got you covered. With Mail IT, you can craft personalized, <b>AI-generated</b> emails and send them directly to your recipient without the hassle of opening your email client.
     </p>
