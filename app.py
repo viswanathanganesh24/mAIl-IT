@@ -96,6 +96,18 @@ if "logged_in" in st.query_params and st.query_params["logged_in"] == "logged_in
     st.session_state['signedIn'] = True
 
 if not st.session_state["submitted"] and not st.session_state["signedIn"]:
+    st.markdown('''<header style="text-align: center; padding: 20px; background-color: #4CAF50; color: white;">
+    <h1>Mail IT</h1>
+    <p>Your one-stop solution to generate and send emails effortlessly!</p>
+</header>''', unsafe_allow_html=True)
+    st.markdown('''<main style="max-width: 800px; margin: auto; padding: 20px; font-family: Arial, sans-serif;">
+    <!-- Introduction -->
+    <section style="margin-bottom: 30px;">
+        <h2>Welcome to Mail IT!</h2>
+        <p>
+            Need to send an email quickly? We've got you covered. With Mail IT, you can craft personalized emails and send them directly to your recipient without the hassle of opening your email client.
+        </p>
+    </section>''', unsafe_allow_html=True)
     st.link_button("Sign in", auth_url)
     
     if 'code' in st.query_params:
