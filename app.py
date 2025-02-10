@@ -149,3 +149,4 @@ elif st.session_state["submitted"] and st.session_state['signedIn']:
     if notsend:
         st.session_state['submitted'] = False
         st.session_state['signedIn'] = False
+        st.query_params['logged_in'] = 'NAN'
