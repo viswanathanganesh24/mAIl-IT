@@ -12,6 +12,8 @@ from email.mime.text import MIMEText
 from google.oauth2.credentials import Credentials
 from googleapiclient.discovery import build
 
+
+st.set_page_config(page_title="Main Page", page_icon="🏠")
 client_id = st.secrets['client_id']
 client_secret = st.secrets['client_secret']
 redirect_uri = st.secrets['redirect_uri']
