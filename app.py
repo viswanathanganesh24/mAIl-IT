@@ -96,7 +96,7 @@ if "logged_in" in st.query_params and st.query_params["logged_in"] == "logged_in
     st.session_state['signedIn'] = True
 
 if not st.session_state["submitted"] and not st.session_state["signedIn"]:
-    st.markdown('''<header style="text-align: center; padding: 20px; background-color: #2C3E50; color: white;">
+    st.markdown('''<header style="text-align: center; padding: 20px; background-color: #121829; color: white;">
     <h1>Mail IT</h1>
     <p>Your one-stop solution to generate and send emails effortlessly!</p>
 </header>''', unsafe_allow_html=True)
