@@ -101,11 +101,15 @@ if not st.session_state["submitted"] and not st.session_state["signedIn"]:
     <p>Your one-stop solution to generate and send emails effortlessly!</p>
 </header>''', unsafe_allow_html=True)
     st.markdown('''<main style="max-width: 800px; margin: auto; padding: 20px; font-family: Arial, sans-serif;">
-    <!-- Introduction -->
-    <section style="margin-bottom: 30px;">
+    <section style="
+    margin-bottom: 30px; 
+    text-align: left;
+    max-width: 800px;
+    margin-left: auto; 
+    margin-right: auto;
+">
         <h2>Welcome to Mail IT!</h2>
-        <p>
-             Need to send an email quickly? We've got you covered. With Mail IT, you can craft personalized, <b>AI-generated</b> emails and send them directly to your recipient without the hassle of opening your email client.</p>
+        <p>Need to send an email quickly? We've got you covered. With Mail IT, you can craft personalized, <b>AI-generated</b> emails and send them directly to your recipient without the hassle of opening your email client.</p>
     </section>''', unsafe_allow_html=True)
     st.link_button("Sign in", auth_url)
     
