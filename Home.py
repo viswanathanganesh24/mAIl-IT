@@ -118,7 +118,7 @@ if not st.session_state["submitted"] and not st.session_state["signedIn"]:
     <p style="
         line-height: 1.6; /* Improved readability */
         color: #555; /* Slightly softer text color */
-        font-size: 18px; /* Consistent font size */
+        font-size: 20px; /* Consistent font size */
     ">
         Need to send an email quickly? We've got you covered. With Mail IT, you can craft personalized, <b>AI-generated</b> emails and send them directly to your recipient without the hassle of opening your email client.
     </p>
