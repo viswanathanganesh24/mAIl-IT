@@ -123,15 +123,15 @@ if not st.session_state["submitted"] and not st.session_state["signedIn"]:
         Need to send an email quickly? We've got you covered. With mAIl-IT, you can craft personalized, <b>AI-generated</b> emails and send them directly to your recipient without the hassle of opening your email client.
     </p>
 </section>''', unsafe_allow_html=True)
-    st.link_button("Sign in", auth_url)
+    st.link_button("Sign in with Google", auth_url)
 
     if 'code' in st.query_params:
         st.session_state['signedIn'] = True
 elif not st.session_state["submitted"] and st.session_state['signedIn']:
     with st.form(key='my_form'):
-        to = st.text_input("Name")
+        to = st.text_input("Receiver's Name")
         st.session_state['to_email'] = st.text_input("To Email")
-        reason = st.text_area("Describe about your mail requirements")
+        reason = st.text_area("Describe about what you want in your mail :)")
         name = st.text_input("Your Name")
         contact = st.text_input("Enter Phone number")
         submit = st.form_submit_button("Submit")
