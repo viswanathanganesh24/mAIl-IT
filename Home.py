@@ -120,7 +120,7 @@ if not st.session_state["submitted"] and not st.session_state["signedIn"]:
         color: #555; /* Slightly softer text color */
         font-size: 20px; /* Consistent font size */
     ">
-        Need to send an email quickly? We've got you covered. With Mail IT, you can craft personalized, <b>AI-generated</b> emails and send them directly to your recipient without the hassle of opening your email client.
+        Need to send an email quickly? We've got you covered. With mAIl-IT, you can craft personalized, <b>AI-generated</b> emails and send them directly to your recipient without the hassle of opening your email client.
     </p>
 </section>''', unsafe_allow_html=True)
     st.link_button("Sign in", auth_url)
