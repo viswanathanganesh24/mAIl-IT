@@ -101,6 +101,7 @@ def sendMail(to_email, content):
 
     try:
         service.users().messages().send(userId="me", body=create_message).execute()
+        thankyou()
         #st.write("Mail has been successfully sent!")
     except:
         st.write("There was trouble in sending mail")
@@ -172,7 +173,7 @@ elif st.session_state["submitted"] and st.session_state['signedIn'] and not st.s
             st.session_state['submitted'] = False
             st.session_state['signedIn'] = False
             st.query_params['logged_in'] = 'NAN'
-            thankyou()
+
             st.rerun()
         except:
             pass
