@@ -90,6 +90,11 @@ def sendMail(to_email, content):
     except:
         st.write("There was trouble in sending mail")
 
+@st.dialog("Custom Dialog Title", width="large")
+def thankyou():
+    st.write("Thank you for choosing mAIl-IT <3. Your mail has been sent succesfully")
+    if st.button("Close"):
+        st.rerun()
 
 if 'submitted' not in st.session_state:
     st.session_state['submitted'] = False
@@ -154,6 +159,8 @@ elif st.session_state["submitted"] and st.session_state['signedIn'] and not st.s
         try:
             sendMail(st.session_state['to_email'], st.session_state['output'])
             st.session_state['mail_sent'] = True
+            st.query_params['logged_in'] = 'NAN'
+            thankyou()
             st.rerun()
         except:
             st.write("There was an error in sending the mail! Please press the Redo button!")
@@ -162,12 +169,5 @@ elif st.session_state["submitted"] and st.session_state['signedIn'] and not st.s
         st.session_state['signedIn'] = False
         st.query_params['logged_in'] = 'NAN'
         st.rerun()
-elif st.session_state["submitted"] and st.session_state['signedIn'] and st.session_state['mail_sent']:
-    st.write("Mail has been successfully sent!")
-    notsend = st.button("Go to Home")
-    if notsend:
-        st.session_state['submitted'] = False
-        st.session_state['signedIn'] = False
-        st.query_params['logged_in'] = 'NAN'
-        st.rerun()
+
         
