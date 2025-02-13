@@ -97,6 +97,9 @@ if 'submitted' not in st.session_state:
 if 'signedIn' not in st.session_state:
     st.session_state['signedIn'] = False
 
+if 'mail_sent' not in st.session_state:
+    st.session_state['mail_sent'] = False
+
 if "logged_in" in st.query_params and st.query_params["logged_in"] == "logged_in":
     st.session_state['signedIn'] = True
 
@@ -140,7 +143,7 @@ elif not st.session_state["submitted"] and st.session_state['signedIn']:
         st.session_state['output'] = AI(user_prompt=user_prompt)
         st.session_state['submitted'] = True
         st.rerun()
-elif st.session_state["submitted"] and st.session_state['signedIn']:
+elif st.session_state["submitted"] and st.session_state['signedIn'] and not st.session_state['mail_sent']:
     st.write(st.session_state['output'])
     col1, col2 = st.columns(2)
     with col1:
@@ -150,9 +153,21 @@ elif st.session_state["submitted"] and st.session_state['signedIn']:
     if send:
         try:
             sendMail(st.session_state['to_email'], st.session_state['output'])
+            st.session_state['mail_sent'] = True
+            st.rerun()
         except:
             st.write("There was an error in sending the mail! Please press the Redo button!")
     if notsend:
         st.session_state['submitted'] = False
         st.session_state['signedIn'] = False
         st.query_params['logged_in'] = 'NAN'
+        st.rerun()
+elif st.session_state["submitted"] and st.session_state['signedIn'] and st.session_state['mail_sent']:
+    st.write("Mail has been successfully sent!")
+    notsend = st.button("Go to Home")
+    if notsend:
+        st.session_state['submitted'] = False
+        st.session_state['signedIn'] = False
+        st.query_params['logged_in'] = 'NAN'
+        st.rerun()
+        
