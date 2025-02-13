@@ -62,11 +62,11 @@ async def get_access_token(client: GoogleOAuth2, redirect_uri: str, code: str):
     return token
 
 
-#@st.dialog("Mail Sent Successfully", width="large")
-#def thankyou():
-#    st.write("Thank you for choosing mAIl-IT <3. Your mail has been sent succesfully")
-#    if st.button("Close"):
-#        st.rerun()
+@st.dialog("Mail Sent Successfully", width="large")
+def thankyou():
+    st.write("Thank you for choosing mAIl-IT <3. Your mail has been sent succesfully")
+    if st.button("Close"):
+        st.rerun()
 
 @st.dialog("Unsuccessful", width="large")
 def redo():
@@ -103,8 +103,7 @@ def sendMail(to_email, content):
         service.users().messages().send(userId="me", body=create_message).execute()
         #st.write("Mail has been successfully sent!")
     except:
-        redo()
-        #st.write("There was trouble in sending mail")
+        st.write("There was trouble in sending mail")
 
 
 if 'submitted' not in st.session_state:
