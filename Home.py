@@ -86,14 +86,24 @@ def sendMail(to_email, content):
 
     try:
         service.users().messages().send(userId="me", body=create_message).execute()
-        st.write("Mail has been successfully sent!")
+        #st.write("Mail has been successfully sent!")
     except:
-        st.write("There was trouble in sending mail")
+        pass
+        #st.write("There was trouble in sending mail")
 
 @st.dialog("Mail Sent Successfully", width="large")
 def thankyou():
     st.write("Thank you for choosing mAIl-IT <3. Your mail has been sent succesfully")
     if st.button("Close"):
+        st.rerun()
+
+@st.dialog("Unsuccessful", width="large")
+def redo():
+    st.write("There was an error :(")
+    if st.button("Redo"):
+        st.session_state['submitted'] = False
+        st.session_state['signedIn'] = False
+        st.query_params['logged_in'] = 'NAN'
         st.rerun()
 
 if 'submitted' not in st.session_state:
@@ -165,7 +175,7 @@ elif st.session_state["submitted"] and st.session_state['signedIn'] and not st.s
             thankyou()
             st.rerun()
         except:
-            st.write("There was an error in sending the mail! Please press the Redo button!")
+            #st.write("There was an error in sending the mail! Please press the Redo button!")
     if notsend:
         st.session_state['submitted'] = False
         st.session_state['signedIn'] = False
