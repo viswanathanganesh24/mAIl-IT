@@ -61,13 +61,13 @@ async def get_access_token(client: GoogleOAuth2, redirect_uri: str, code: str):
     token = await client.get_access_token(code, redirect_uri)
     return token
 
-'''
-@st.dialog("Mail Sent Successfully", width="large")
-def thankyou():
-    st.write("Thank you for choosing mAIl-IT <3. Your mail has been sent succesfully")
-    if st.button("Close"):
-        st.rerun()
-'''
+
+#@st.dialog("Mail Sent Successfully", width="large")
+#def thankyou():
+#    st.write("Thank you for choosing mAIl-IT <3. Your mail has been sent succesfully")
+#    if st.button("Close"):
+#        st.rerun()
+
 @st.dialog("Unsuccessful", width="large")
 def redo():
     st.write("There was an error :(")
