@@ -101,7 +101,7 @@ def sendMail(to_email, content):
 
     try:
         service.users().messages().send(userId="me", body=create_message).execute()
-        thankyou()
+        #thankyou()
         #st.write("Mail has been successfully sent!")
     except:
         st.write("There was trouble in sending mail")
